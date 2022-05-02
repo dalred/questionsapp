@@ -1,6 +1,6 @@
 from typing import Any, List
 from sqlalchemy.orm.scoping import scoped_session
-
+from sqlite3 import IntegrityError
 
 class BaseDAO:
     def __init__(self, session: scoped_session, model):
@@ -16,8 +16,11 @@ class BaseDAO:
 
     def create(self, data: dict) -> Any:
         ent = self.model(**data)
-        self._db_session.add(ent)
-        self._db_session.commit()
+        try:
+            self._db_session.add(ent)
+            self._db_session.commit()
+        except IntegrityError:
+            self._db_session.session.rollback()
         return ent
 
     def update(self, update) -> None:

@@ -31,7 +31,7 @@ def create_data(app: Flask) -> None:
         create_tables()
 
 
-app = create_app(PostgresConfig)
+app = create_app(DevelopmentConfig)
 migrate = Migrate(app, db)
 
 if __name__ == '__main__':
