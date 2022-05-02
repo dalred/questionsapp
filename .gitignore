@@ -1,0 +1,11 @@
+/.idea
+.idea
+dao/__pycache__
+helpers/__pycache__
+views/__pycache__
+.DS_Store
+__pycache__
+service/__pycache__
+venv
+test.py
+/.sql
