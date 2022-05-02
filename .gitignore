@@ -1,5 +1,6 @@
 /.idea
 .idea/
+.idea
 dao/__pycache__
 helpers/__pycache__
 views/__pycache__
@@ -8,3 +9,5 @@ __pycache__
 service/__pycache__
 venv
 test.py
+config.py
+docker-compose.yaml
