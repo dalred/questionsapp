@@ -1,4 +1,4 @@
-http://skypro-dal.ga/
+http://dalforcustomers.ga
 ##### Список допустимых эндпойнтов
 > flask routes
 
@@ -14,7 +14,7 @@ specs                       GET                 /swagger.json
 static                      GET                 /static/<path:filename>
 ```
 ###### Пример POST запроса на  
-http://skypro-dal.ga/questions/ask/
+http://dalforcustomers.ga/questions/ask/
 ```
 {
 "questions_num": 2
