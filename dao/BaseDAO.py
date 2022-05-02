@@ -8,8 +8,8 @@ class BaseDAO:
         self.model = model
         self.message = model.__name__
 
-    def get_by_api_question_id(self, pk: int) -> Any:
-        return self._db_session.query(self.model).filter(self.model.api_question_id == pk).one_or_none()
+    def get_by_id(self, pk: int) -> Any:
+        return self._db_session.query(self.model).filter(self.model.id == pk).one_or_none()
 
     def get_all(self):
         return self._db_session.query(self.model).all()

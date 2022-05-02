@@ -12,7 +12,7 @@ class Question(db.Model):
     answer: str  # = field(default=None)
 
     __tablename__ = 'questions'
-    id_ = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     api_question_id = db.Column(db.Integer, unique=True)
     created_at = db.Column(db.TIMESTAMP, nullable=False, default=datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"
                                                                                                   ".%fZ"))

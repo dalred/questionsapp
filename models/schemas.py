@@ -7,7 +7,7 @@ class QuestionSchema(Schema):
     class Meta:
         unknown = EXCLUDE
 
-    id_ = Int(dump_only=True)  # Пропускаем поле id для дессерилиазации(для load)
+    id = Int(dump_only=True)  # Пропускаем поле id для дессерилиазации(для load)
     api_question_id = Int(load_only=True, data_key='id')
     created_at = DateTime(load_default=datetime.datetime.now())
     question = Str()

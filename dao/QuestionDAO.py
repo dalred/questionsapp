@@ -2,6 +2,9 @@ from dao.BaseDAO import BaseDAO
 from typing import Any, List
 
 class QuestionDAO(BaseDAO):
+    def get_by_api_question_id(self, pk: int) -> Any:
+        return self._db_session.query(self.model).filter(self.model.api_question_id == pk).one_or_none()
+
     def create_many(self, datas: List[dict]) -> Any:
         data_model = []
         for data in datas:
