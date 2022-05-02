@@ -20,7 +20,7 @@ http://skypro-dal.ga/questions/ask/
 "questions_num": 2
 }
 ```
-###### Пример ответа сервера
+###### Пример ответа сервера, последняя добавленная запись
 ```json
 {
     "question": "This former Berlin Wall checkpoint, where you can see instruments of escape used by East Germans",
