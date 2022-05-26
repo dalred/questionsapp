@@ -21,12 +21,12 @@ jobs:
       - name: Echo gitHubname and repo
         run: echo ${{ github.repository }}/${{ github.ref_name }}/${{secrets.NAME_APP}}
       - name: 'Create env file'
-          run: |
-            touch .env
-            echo client_id=${{ secrets.client_id }} >> .env
-            echo client_secret=${{ secrets.client_secret }} >> .env
-            echo access_token=${{ secrets.access_token }} >> .env
-            cat .env
+        run: |
+          touch .env
+          echo client_id=${{ secrets.client_id }} >> .env
+          echo client_secret=${{ secrets.client_secret }} >> .env
+          echo access_token=${{ secrets.access_token }} >> .env
+          cat .env
       - name: render config.py
         run: |
           cat docker_ci_config.py | envsubst > config.py
