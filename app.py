@@ -24,7 +24,7 @@ def register_extensions(app: Flask) -> None:
     db.init_app(app)
     api = Api(app)
     api.add_namespace(questions_ns)
-    api.add_namespace(hh_ns)
+    #api.add_namespace(hh_ns)
     create_data(app)
 
 
@@ -33,7 +33,7 @@ def create_data(app: Flask) -> None:
         create_tables()
 
 
-app = create_app(PostgresConfig)
+app = create_app(DevelopmentConfig)
 migrate = Migrate(app, db)
 
 if __name__ == '__main__':
