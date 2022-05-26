@@ -8,6 +8,7 @@ from config import DevelopmentConfig, PostgresConfig
 from helpers.create_tables import create_tables
 
 from setup_db import db
+from views.hh_view import hh_ns
 from views.question_view import questions_ns
 
 
@@ -23,6 +24,7 @@ def register_extensions(app: Flask) -> None:
     db.init_app(app)
     api = Api(app)
     api.add_namespace(questions_ns)
+    api.add_namespace(hh_ns)
     create_data(app)
 
 

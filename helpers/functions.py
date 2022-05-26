@@ -1,7 +1,15 @@
 import csv
 import json
 import os
+import webbrowser
 
+import requests
+import dotenv
+
+from rauth import OAuth2Service
+
+dotenv_file = dotenv.find_dotenv()
+dotenv.load_dotenv(dotenv_file)
 
 def read_json(name: str) -> dict:
     with open(name, "r", encoding='utf-8') as file:
@@ -29,3 +37,46 @@ def csv_to_json(csv_file_path: str, out_path: str) -> None:
     with open(out_path, 'w', encoding='utf-8') as jsonf:
         json_string = json.dumps(jsonArray, indent=4, ensure_ascii=False)
         jsonf.write(json_string)
+
+def get_user_access_token(user_code, state):
+    """
+    :return: {
+        "access_token": "{access_token}",
+        "token_type": "bearer",
+        "expires_in": 1209600,
+        "refresh_token": "{refresh_token}"
+        }
+    """
+    url = 'https://hh.ru/oauth/token'
+
+    data = {
+        'grant_type': 'authorization_code',
+        'client_id': os.getenv('client_id'),
+        'client_secret': os.getenv("client_secret"),
+        'code': user_code,
+        'state': state
+    }
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    response = requests.post(url, data=data, headers=headers)
+
+    if response.status_code == 200:
+        res_json = response.json()
+        return res_json['access_token'], res_json['refresh_token'], res_json['expires_in']
+    elif response.status_code == 400:
+        print('Bad request')
+    return response
+
+
+def get_autorized():
+    hh = OAuth2Service(
+        client_id=os.getenv('client_id'),
+        client_secret=os.getenv('client_secret'),
+        name='Checker',
+        authorize_url='https://hh.ru/oauth/authorize',
+        access_token_url='https://hh.ru/oauth/token',
+        base_url='https://hh.ru/')
+
+    params = {'state': 'read_stream',
+              'response_type': 'code'}
+    authorize_url = hh.get_authorize_url(**params)
+    webbrowser.open_new_tab(authorize_url)
